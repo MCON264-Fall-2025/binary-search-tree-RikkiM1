@@ -32,32 +32,29 @@ public class TraversalExercises {
         return result;
     }
 
-    // Iterative inorder using a stack
     public static <T extends Comparable<T>> List<T> inorderIterative(TreeNode<T> root) {
         List<T> result = new ArrayList<>();
-        // TODO: implement iterative inorder
-        Deque<TreeNode<T>> d = new ArrayDeque<>();
+        Deque<TreeNode<T>> stack = new ArrayDeque<>();
         TreeNode<T> curr = root;
 
-        while (curr != null || !d.isEmpty()) {
-
-            while (curr.getLeft() != null) {
-                d.push(curr);
+        while (curr != null || !stack.isEmpty()) {
+            // Go left as far as possible
+            while (curr != null) {
+                stack.push(curr);
                 curr = curr.getLeft();
             }
-            curr=d.pop();
+            // Pop from stack and process
+            curr = stack.pop();
             result.add(curr.getValue());
+            // Move to right subtree
+            curr = curr.getRight();
+        }
 
-
-
-                curr = curr.getRight();
-
-
-            }
-        // Hint: use a pointer 'curr' and a stack:
-        //   while (curr != null || !stack.isEmpty()) { ... }
         return result;
     }
+        // Hint: use a pointer 'curr' and a stack:
+        //   while (curr != null || !stack.isEmpty()) { ... }
+
 
     // Optional / challenge: iterative postorder
     public static <T extends Comparable<T>> List<T> postorderIterative(TreeNode<T> root) {
