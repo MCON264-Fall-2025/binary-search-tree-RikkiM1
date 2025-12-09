@@ -46,7 +46,7 @@ public class TraversalExercises {
             curr = d.pop();
             result.add(curr.getValue());
 
-            curr.getRight();
+            curr= curr.getRight();
             }
         // Hint: use a pointer 'curr' and a stack:
         //   while (curr != null || !stack.isEmpty()) { ... }
