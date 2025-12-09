@@ -43,6 +43,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     private void preorderRecursive(TreeNode<T> node, List<T> out) {
         // TODO: implement Preorder: Root -> Left -> Right
+        if(node == null) return;
+            out.add(node.getValue());
+            preorderRecursive(node.getLeft(), out);
+            preorderRecursive(node.getRight(), out);
+
         // hint: check for null, then visit node, then recurse on left and right
     }
 
@@ -54,6 +59,12 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     private void inorderRecursive(TreeNode<T> node, List<T> out) {
         // TODO: implement Inorder: Left -> Root -> Right
+        if(node != null) {
+            inorderRecursive(node.getLeft(), out);
+            out.add(node.getValue());
+            inorderRecursive(node.getRight(), out);
+        }
+
     }
 
     public List<T> postorderRecursive() {
@@ -64,6 +75,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     private void postorderRecursive(TreeNode<T> node, List<T> out) {
         // TODO: implement Postorder: Left -> Right -> Root
+        if(node != null) {
+            postorderRecursive(node.getLeft(), out);
+            postorderRecursive(node.getRight(), out);
+            out.add(node.getValue());
+        }
     }
 
     // --------- Level-order (Breadth-First) ----------
@@ -71,23 +87,40 @@ public class BinarySearchTree<T extends Comparable<T>> {
     public List<T> levelOrder() {
         List<T> result = new ArrayList<>();
         // TODO: implement level-order using a Queue<TreeNode<T>>
+        Queue<TreeNode<T>> q = new ArrayDeque<>();
+
         // 1. if root is null, return empty list
+        if (root == null) {
+            return result;
+        }
         // 2. enqueue root
+        q.add(root);
         // 3. while queue not empty:
-        //      - dequeue node
-        //      - add node.value to result
-        //      - enqueue children if not null (left then right)
-        return result;
+        while(!q.isEmpty()) {
+            //      - dequeue node
+            TreeNode<T> node = q.remove();
+            //      - add node.value to result
+            result.add(node.getValue());
+            //      - enqueue children if not null (left then right)
+            if (node.getLeft() != null) {
+
+                q.add(node.getLeft());
+            }
+            if (node.getRight() != null) {
+                q.add(node.getRight());
+            }
+        }
+                return result;
     }
 
     // --------- Unified API via TraversalType ----------
 
     public List<T> getByTraversal(TraversalType type) {
-        // TODO: dispatch based on traversal type
-//        return switch (type) {
-//            default ->
-//                throw new IllegalArgumentException("Not implemented yet");
-//        };
-        return new ArrayList<>(); // placeholder
+        return switch (type) {
+            case PREORDER -> preorderRecursive();
+            case INORDER -> inorderRecursive();
+            case POSTORDER -> postorderRecursive();
+            case LEVEL_ORDER -> levelOrder();
+        };
     }
 }

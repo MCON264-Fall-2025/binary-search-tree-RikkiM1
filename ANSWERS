@@ -1,0 +1,21 @@
+1. Why does inorder traversal of a BST return elements in sorted order?
+because we are going through the tree from root to left to right so we are "collecting" all the noeds in their correct
+order because that is how they are sorted when out into the tree. so we are getting them back in the right order.
+
+2. Give an example of an insertion order that produces a highly unbalanced BST.
+What does the inorder traversal look like for that tree?
+
+when every new element is inserted to the same side.
+would give the correct order.
+
+3. In your own words, explain the differences between:
+
+Recursive vs iterative traversal
+recursive cannot handle a very deep tree and does not need to keep track of its own data while stack is not as easy and need
+to keep track of your own data.
+
+Depth-first vs breadth-first traversal
+going all the way down one way and then all the way down the other side vs going side to side and slowly making your way down.
+
+4. When might you prefer a breadth-first traversal in a real application?
+if you just want to get the "lowest" oder, like the one that is the highest in ascending order ,
