@@ -38,15 +38,21 @@ public class TraversalExercises {
         // TODO: implement iterative inorder
         Deque<TreeNode<T>> d = new ArrayDeque<>();
         TreeNode<T> curr = root;
+
         while (curr != null || !d.isEmpty()) {
-            while (curr != null) {
-                d.addLast(curr);
+
+            while (curr.getLeft() != null) {
+                d.push(curr);
                 curr = curr.getLeft();
             }
-            curr = d.pop();
+            curr=d.pop();
             result.add(curr.getValue());
 
-            curr= curr.getRight();
+
+
+                curr = curr.getRight();
+
+
             }
         // Hint: use a pointer 'curr' and a stack:
         //   while (curr != null || !stack.isEmpty()) { ... }
